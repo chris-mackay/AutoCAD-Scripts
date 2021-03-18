@@ -1,0 +1,15 @@
+(defun remove-unloaded-xrefs ()
+(vlax-for block (vla-get-blocks
+(vla-get-activedocument
+(vlax-get-acad-object)))
+(if (and (= :vlax-true (vla-get-isxref block))
+(= 0 (vla-get-count block))
+)
+(vla-detach block)
+)
+)
+)
+(defun c:rux ()
+(remove-unloaded-xrefs)
+(princ)
+)
